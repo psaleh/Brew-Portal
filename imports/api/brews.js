@@ -10,7 +10,7 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
-     const mySchema = new SimpleSchema({
+     new SimpleSchema({
             brewName: {
                 type: String,
                 label: 'Beer Name'
@@ -27,16 +27,15 @@ Meteor.methods({
                 type: Number,
                 label: 'Target Fermentation Temperature'
             }
-        });
-        mySchema.clean({ targetFg, targetTemp });
-        mySchema.validate({ brewName, brewStyle, targetFg, targetTemp });
+        }).validate({ brewName, brewStyle, targetFg, targetTemp });
 
         const brewObject = Brews.insert({
            brewName,
            brewDate: new Date().getTime(),
            brewStyle,
            targetFg,
-           targetTemp
+           targetTemp,
+           userId: this.userId
         });
     }
 });
