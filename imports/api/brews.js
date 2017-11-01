@@ -4,6 +4,12 @@ import SimpleSchema from 'simpl-schema';
 
 export const Brews = new Mongo.Collection('brews');
 
+if (Meteor.isServer) {
+    Meteor.publish('brews', function () {
+      return Brews.find({ userId: this.userId });
+    });
+  }
+
 Meteor.methods({
     'brews.insert'(brewName, brewStyle, targetFg, targetTemp) {
         if (!this.userId) {

@@ -11,6 +11,11 @@ Tracker.autorun(() => {
   onAuthChange(isAuthenticated);
 });
 
+Tracker.autorun(() => {
+  const selectedBrewId = Session.get('selectedBrewId');
+});
+
 Meteor.startup(() => {
+  Session.set('selectedBrewId', undefined);
   ReactDOM.render(routes, document.getElementById('app'));
 });
