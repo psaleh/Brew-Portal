@@ -11,8 +11,9 @@ export const BrewListItem = (props) => {
     <div onClick={() => {
       props.Session.set('selectedBrewId', props.brew._id);
     }}>
-      <h5> { props.brew.brewName || 'Untitled note' }</h5>
-      <p>{ moment(props.brew.brewDate).format('DD/MM/YYYY') }</p>
+      <h5>{props.brew.brewName}</h5>
+      <p>{props.brew.brewStyle}</p>
+      <p>Brewed on: { moment(props.brew.brewDate).format('DD/MM/YYYY') }</p>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import BrewList from './BrewList';
 export default () => {
   return (
     <div>
-      <PrivateHeader title="Dashboard"/>
+      <PrivateHeader title="Bomb Shelter Brewery Portal"/>
       <div className="page-content">
         <AddBrew />
         <BrewList />
