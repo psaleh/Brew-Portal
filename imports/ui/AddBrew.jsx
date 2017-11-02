@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import Modal from 'react-modal';
 
 export default class AddBrew extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export default class AddBrew extends React.Component {
             brewStyle: '',
             targetFg: '',
             targetTemp: '',
-            error: ''
+            error: '',
+            isOpen: false
         };
     }
     onSubmit(e) {
@@ -22,13 +24,7 @@ export default class AddBrew extends React.Component {
             if (err) {
                 this.setState({error: err.reason});
             } else {
-                this.setState({
-                    error: '', 
-                    brewName: '',
-                    brewStyle: '',
-                    targetFg: '',
-                    targetTemp: ''
-                });
+              this.handleModalClose();
                 
             }
         });
@@ -40,17 +36,36 @@ export default class AddBrew extends React.Component {
       [name]: e.target.value
     });
   }
+  handleModalClose() {
+    this.setState({
+      isOpen: false,
+      brewName: '',
+      brewStyle: '',
+      targetFg: '',
+      targetTemp: '',
+      error: ''
+    });
+  }
     render() {
         return (
             <div>
-              {this.state.error ? <p>{this.state.error}</p> : undefined}
-              <form onSubmit={this.onSubmit.bind(this)}>
-                <input type="text" value={this.state.brewName} name="brewName" placeholder="Name of Beer" onChange={this.onChange.bind(this)}/>
-                <input type="text" value={this.state.brewStyle} name="brewStyle" placeholder="Style of Beer" onChange={this.onChange.bind(this)}/>
-                <input type="text" value={this.state.targetFg} name="targetFg" placeholder="Expected Final Gravity" onChange={this.onChange.bind(this)}/>
-                <input type="text" value={this.state.targetTemp} name="targetTemp" placeholder="Target Fermentation Temperature" onChange={this.onChange.bind(this)}/>                
-                <button>Add Brew</button>
-              </form>
+                <button className="button" onClick={() => this.setState({isOpen: true})}>Create Brew Session</button>
+                <Modal
+                  isOpen={this.state.isOpen}
+                  contentLabel="Add Brew"
+                  onAfterOpen={() => this.refs.brewName.focus()}
+                  onRequestClose={this.handleModalClose.bind(this)}>
+                    <h1>Add New Brew Session</h1>
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+                    <form onSubmit={this.onSubmit.bind(this)}>
+                      <input type="text" value={this.state.brewName} ref="brewName" name="brewName" placeholder="Name of Beer" onChange={this.onChange.bind(this)}/>
+                      <input type="text" value={this.state.brewStyle} name="brewStyle" placeholder="Style of Beer" onChange={this.onChange.bind(this)}/>
+                      <input type="text" value={this.state.targetFg} name="targetFg" placeholder="Expected Final Gravity" onChange={this.onChange.bind(this)}/>
+                      <input type="text" value={this.state.targetTemp} name="targetTemp" placeholder="Target Fermentation Temperature" onChange={this.onChange.bind(this)}/>                
+                      <button type="submit" className="button">Add Brew</button>
+                      <button type="button" className="button button--secondary" onClick={this.handleModalClose.bind(this)}>Cancel</button>
+                    </form>
+                </Modal>
             </div>
         );
     }

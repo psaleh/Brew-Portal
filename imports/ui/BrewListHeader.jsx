@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const BrewListHeader = (props) => {
   return (
     <div>
-      <button className="button">Create Brew Session</button>
+      
     </div>
   );
 };
