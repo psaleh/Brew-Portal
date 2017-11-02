@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import PropTypes from 'prop-types';
 
@@ -25,7 +25,7 @@ propTypes = {
   brews: PropTypes.array.isRequired
 };
 
-export default createContainer(() => {
+export default withTracker(() => {
   const selectedBrewId = Session.get('selectedBrewId');
 
   Meteor.subscribe('brews');
@@ -42,4 +42,4 @@ export default createContainer(() => {
       };
     })
   };
-}, BrewList);
+})(BrewList);

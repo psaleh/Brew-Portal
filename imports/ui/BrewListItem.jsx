@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Session } from 'meteor/session';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 
 export const BrewListItem = (props) => {
@@ -24,6 +24,6 @@ propTypes = {
   Session: PropTypes.object.isRequired
 };
 
-export default createContainer(() => {
+export default withTracker(() => {
   return { Session };
-}, BrewListItem);
+})(BrewListItem);
