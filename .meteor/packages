@@ -20,6 +20,6 @@ shell-server@0.2.4            # Server-side component of the `meteor shell` comm
 
 accounts-password@1.4.0
 session@1.1.7
-fourseven:scss@=3.13.0
 dynamic-import
 react-meteor-data
+fourseven:scss
