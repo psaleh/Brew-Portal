@@ -49,7 +49,7 @@ export default class AddBrew extends React.Component {
     render() {
         return (
             <div>
-                <button className="button" onClick={() => this.setState({isOpen: true})}>Create Brew Session</button>
+                <button className="button" onClick={() => this.setState({isOpen: true})}>New Brew Session</button>
                 <Modal
                   isOpen={this.state.isOpen}
                   contentLabel="Add Brew"
