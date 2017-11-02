@@ -19,19 +19,23 @@ Meteor.methods({
      new SimpleSchema({
             brewName: {
                 type: String,
-                label: 'Beer Name'
+                label: 'Beer Name',
+                min: 1
             },
             brewStyle: {
                 type: String,
-                label: 'Beer Style'
+                label: 'Beer Style',
+                min: 1
             },
             targetFg: {
                 type: Number,
-                label: 'Target Final Gravity'
+                label: 'Target Final Gravity',
+                min: 1
             },
             targetTemp: {
                 type: Number,
-                label: 'Target Fermentation Temperature'
+                label: 'Target Fermentation Temperature',
+                min: 1
             }
         }).validate({ brewName, brewStyle, targetFg, targetTemp });
 
