@@ -4,7 +4,6 @@ import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 
 import { routes, onAuthChange } from '../imports/routes/routes';
-import { setBrewCollection } from '../imports/api/brewlog';
 import '../imports/startup/simple-schema-configuration.js';
 
 Tracker.autorun(() => {
@@ -12,13 +11,7 @@ Tracker.autorun(() => {
   onAuthChange(isAuthenticated);
 });
 
-Tracker.autorun(() => {
-  const selectedBrewId = Session.get('selectedBrewId');
-  console.log('brewid', selectedBrewId);
-  if (selectedBrewId){
-    setBrewCollection(selectedBrewId);
-  }
-});
+
 
 Meteor.startup(() => {
   Session.set('selectedBrewId', undefined);

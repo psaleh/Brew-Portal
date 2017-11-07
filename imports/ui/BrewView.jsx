@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 
 import { Brews } from '../api/brews';
+import { BrewData } from '../api/brewdata';
 
 
 export class BrewView extends React.Component {
@@ -22,6 +23,7 @@ export class BrewView extends React.Component {
         title: this.props.selectedBrew.brewName
       });
     }
+    console.log('brewdata', this.props.selectedBrewData);
   }
   render(){
     return (
@@ -34,8 +36,11 @@ export class BrewView extends React.Component {
 
 export default withTracker(() => {
     const selectedBrewId = Session.get('selectedBrewId');
-  
+    Meteor.subscribe('brews');
+    Meteor.subscribe('brewdata', selectedBrewId);
     return {
-      selectedBrew: Brews.findOne({_id: selectedBrewId})
+      selectedBrew: Brews.findOne({_id: selectedBrewId}),
+      selectedBrewData: BrewData.find({}).fetch()
     };
+
   })(BrewView);
