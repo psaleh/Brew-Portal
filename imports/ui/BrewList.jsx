@@ -33,7 +33,7 @@ export default withTracker(() => {
   return {
     brews: Brews.find({}, {
       sort: {
-        updatedAt: -1
+        brewDate: -1
       }
     }).fetch().map((brew) => {
       return {

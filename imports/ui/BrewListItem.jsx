@@ -14,7 +14,7 @@ export const BrewListItem = (props) => {
       <h5>{props.brew.brewName}</h5>
       <p>{props.brew.brewStyle}</p>
       <p>Brewed on: { moment(props.brew.brewDate).format('DD/MM/YYYY') }</p>
-      {props.brew.selected === true ? <p>selected</p> : undefined} 
+      {props.brew.selected ? <p>selected</p> : undefined} 
     </div>
   );
 };

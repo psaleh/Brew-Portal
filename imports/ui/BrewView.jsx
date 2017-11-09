@@ -5,13 +5,15 @@ import { Session } from 'meteor/session';
 
 import { Brews } from '../api/brews';
 import { BrewData } from '../api/brewdata';
+import Widget from './Widget';
 
 
 export class BrewView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Select a Brew or Create a New Brew to Begin'
+      title: 'Select a Brew or Create a New Brew to Begin',
+      gravity: 'initial gravity state'
     };
   }  
   componentDidUpdate(prevProps, prevState) {
@@ -20,15 +22,16 @@ export class BrewView extends React.Component {
 
     if (currentBrewId && currentBrewId !== prevBrewId) {
       this.setState({
-        title: this.props.selectedBrew.brewName
+        title: this.props.selectedBrew.brewName,
+        gravity: this.props.selectedBrewData[0].gravity
       });
     }
-    console.log('brewdata', this.props.selectedBrewData);
   }
   render(){
     return (
         <div>
           <h2>{this.state.title}</h2>
+          <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
         </div>
       );
   }
@@ -36,11 +39,10 @@ export class BrewView extends React.Component {
 
 export default withTracker(() => {
     const selectedBrewId = Session.get('selectedBrewId');
-    Meteor.subscribe('brews');
-    Meteor.subscribe('brewdata', selectedBrewId);
+    Meteor.subscribe('brewdata');
     return {
       selectedBrew: Brews.findOne({_id: selectedBrewId}),
-      selectedBrewData: BrewData.find({}).fetch()
+      selectedBrewData: BrewData.find({brewId: selectedBrewId}, {sort: {timeStamp: -1}}).fetch()
     };
 
   })(BrewView);
