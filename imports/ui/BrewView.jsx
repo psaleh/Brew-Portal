@@ -13,25 +13,37 @@ export class BrewView extends React.Component {
     super(props);
     this.state = {
       title: 'Select a Brew or Create a New Brew to Begin',
-      gravity: 'initial gravity state'
+      gravity: '-.---',
+      temperature: '--.-'
     };
   }  
   componentDidUpdate(prevProps, prevState) {
     const currentBrewId = this.props.selectedBrew ? this.props.selectedBrew._id : undefined;
     const prevBrewId = prevProps.selectedBrew ? prevProps.selectedBrew._id : undefined;
+    const currentBrewData = this.props.selectedBrewData ? this.props.selectedBrewData[0] : undefined;
+    const prevBrewData = prevProps.selectedBrewData ? prevProps.selectedBrewData[0] : undefined;
 
     if (currentBrewId && currentBrewId !== prevBrewId) {
       this.setState({
         title: this.props.selectedBrew.brewName,
-        gravity: this.props.selectedBrewData[0].gravity
+        gravity: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].gravity : 'No Data',
+        temperature: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].temperature : 'No Data'
       });
-    }
+    } else if (currentBrewData && currentBrewData !== prevBrewData) {
+      this.setState({
+        gravity: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].gravity : 'No Data',
+        temperature: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].temperature : 'No Data'
+    });
   }
+}
+
   render(){
     return (
         <div>
           <h2>{this.state.title}</h2>
           <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
+          <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} />
+          
         </div>
       );
   }
