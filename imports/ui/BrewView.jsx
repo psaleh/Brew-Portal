@@ -6,6 +6,7 @@ import { Session } from 'meteor/session';
 import { Brews } from '../api/brews';
 import { BrewData } from '../api/brewdata';
 import Widget from './Widget';
+import BrewChart from './BrewChart';
 
 
 export class BrewView extends React.Component {
@@ -43,6 +44,7 @@ export class BrewView extends React.Component {
           <h2>{this.state.title}</h2>
           <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
           <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} />
+          <BrewChart data={this.props.selectedBrewData} />
           
         </div>
       );
