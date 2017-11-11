@@ -44,8 +44,16 @@ export class BrewView extends React.Component {
           <h2>{this.state.title}</h2>
           <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
           <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} />
-          <BrewChart data={this.props.selectedBrewData} dataKey="gravity" domain={[1, 'dataMax + 0.005']} />
-          <BrewChart data={this.props.selectedBrewData} dataKey="temperature" domain={['dataMin - 2', 'dataMax + 2']} />
+          <BrewChart 
+            data={this.props.selectedBrewData} 
+            dataKey="gravity" 
+            domain={[1, 'dataMax + 0.005']} 
+            target={this.props.selectedBrew ? this.props.selectedBrew.targetFg : undefined} />
+          <BrewChart 
+            data={this.props.selectedBrewData} 
+            dataKey="temperature" 
+            domain={['dataMin - 2', 'dataMax + 2']} 
+            target={this.props.selectedBrew ? this.props.selectedBrew.targetTemp : undefined} />
           
           
         </div>
