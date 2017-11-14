@@ -1,5 +1,3 @@
-version: '3'
-
 services:
    db:
      image: mongo:latest
@@ -10,15 +8,13 @@ services:
 
    app:
      environment:
-      - MONGO_URL=mongodb://brewportalbrewday_db_1:27017/meteor
-      - ROOT_URL=http://
-      - VIRTUAL_HOST=http://brew.paulsaleh.uk
-      _ VIRTUAL_URL=/
+      - MONGO_URL=mongodb://brewportal_db_1:27017/meteor
+      - ROOT_URL=http://brew.paulsaleh.uk
+      - VIRTUAL_HOST=brew.paulsaleh.uk
+      - VIRTUAL_URL=/
      depends_on:
        - db
      image: psaleh/brew-portal
-     ports:
-       - "80:80"
      restart: always
 
    receiver:
@@ -27,6 +23,12 @@ services:
      image: psaleh/brew-portal-logger
      ports:
        - "12347:12347"
+   proxy:
+     image: jwilder/nginx-proxy
+     ports:
+       - "80:80"
+     volumes:
+       - /var/run/docker.sock:/tmp/docker.sock:ro
 
 volumes:
     mongo_data:
