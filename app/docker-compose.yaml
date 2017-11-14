@@ -10,23 +10,14 @@ services:
 
    app:
      environment:
-      - MONGO_URL=mongodb://brewportalbrewday_db_1:27017/meteor
-      - ROOT_URL=http://
-      - VIRTUAL_HOST=http://brew.paulsaleh.uk
-      _ VIRTUAL_URL=/
+      - MONGO_URL=mongodb://brewportal_db_1:27017/meteor
+      - ROOT_URL=http://localhost
      depends_on:
        - db
      image: psaleh/brew-portal
      ports:
        - "80:80"
      restart: always
-
-   receiver:
-     depends_on:
-       - db
-     image: psaleh/brew-portal-logger
-     ports:
-       - "12347:12347"
 
 volumes:
     mongo_data:
