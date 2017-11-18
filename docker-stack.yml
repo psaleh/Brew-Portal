@@ -1,0 +1,30 @@
+app:
+  autodestroy: always
+  autoredeploy: true
+  environment:
+    - 'MONGO_URL=mongodb://db:27017/meteor'
+    - 'ROOT_URL=http://brew.paulsaleh.uk'
+    - VIRTUAL_HOST=brew.paulsaleh.uk
+    - VIRTUAL_URL=/
+  image: 'psaleh/brew-portal:latest'
+  links:
+    - db
+db:
+  autodestroy: always
+  command: mongod --storageEngine=wiredTiger
+  image: 'mongo:latest'
+  volumes:
+    - '/data/db:/data/db'
+receiver:
+  autodestroy: always
+  image: 'psaleh/brew-portal-logger:latest'
+  links:
+    - db
+  ports:
+    - '12347:12347'
+proxy:
+  image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
