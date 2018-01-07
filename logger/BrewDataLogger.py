@@ -7,7 +7,7 @@ from pprint import pprint
 
 def mongoinsert(jdata):
     # connect to MongoDB
-    client = MongoClient("mongodb://brewportal_db_1")
+    client = MongoClient("mongodb://db_1")
     db = client.meteor
     db.brewdata.insert_one(jdata)
     # Issue the serverStatus command and print the results
