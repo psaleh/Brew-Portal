@@ -70,7 +70,7 @@ def main():
 
 	global screen
 
-	updateSecs = 10 #time in seconds between updating the google sheet
+	updateSecs = 600 #time in seconds between updating the google sheet
 	
 	timestamp = time.time() #Set time for beginning of loop
 	updateTime = timestamp + updateSecs #Set the time for the next update to google sheets
