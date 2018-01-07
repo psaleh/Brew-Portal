@@ -7,7 +7,7 @@ from pprint import pprint
 
 def mongoinsert(jdata):
     # connect to MongoDB
-    client = MongoClient("mongodb://db_1")
+    client = MongoClient("mongodb://db-1")
     db = client.meteor
     db.brewdata.insert_one(jdata)
     # Issue the serverStatus command and print the results
@@ -29,9 +29,9 @@ if __name__ == '__main__':
       jdata['timeStamp'] = datetime.utcnow()
       mongoinsert(jdata)
 # print received data to stdout
-      print jdata['Colour']
-      print jdata['Beer']
-      print jdata['Temp']
-      print jdata['SG']
+      #print jdata['Colour']
+      #print jdata['Beer']
+      #print jdata['Temp']
+      #print jdata['SG']
       c.send('Data Received')
       c.close()
