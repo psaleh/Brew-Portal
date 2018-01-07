@@ -55,7 +55,6 @@ def getdata():
 
 	#assign values to a dictionary variable for the http POST to google sheet
         data = dict()
-  #      data['Colour'] = tiltColour
         data['brewId'] = tiltBeer
         data['temperature'] = tiltTemp
         data['gravity'] = tiltSG
@@ -72,9 +71,9 @@ def main():
 
 	jsonObj = getdata()
 		
-    s = socket.socket()         # Create a socket object
-    host = "13.228.148.72"  # Get remote machine name
-    port = 12347                # Reserve a port for your service.
+	s = socket.socket()         # Create a socket object
+	host = "13.228.148.72"  # Get remote machine name
+	port = 12347                # Reserve a port for your service.
 	s.connect((host, port))
 	s.sendall(jsonObj)
 	print s.recv(1024)
