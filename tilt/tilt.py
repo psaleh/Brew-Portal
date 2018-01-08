@@ -51,11 +51,10 @@ def getdata():
 				tiltSG = float(output[3])/1000
 				tiltTemp = int((tempf - 32) * 5.0/9.0)
 				tiltColour = 'GREEN'
-				tiltBeer = 'TestBrew' #Change to an identifier of a particular brew
+				tiltBeer = 'tdrn3iX9ucmNpbA6n' #Change to an identifier of a particular brew
 
 	#assign values to a dictionary variable for the http POST to google sheet
         data = dict()
-  #      data['Colour'] = tiltColour
         data['brewId'] = tiltBeer
         data['temperature'] = tiltTemp
         data['gravity'] = tiltSG
@@ -70,24 +69,16 @@ def main():
 
 	global screen
 
-	updateSecs = 600 #time in seconds between updating the google sheet
-	
-	timestamp = time.time() #Set time for beginning of loop
-	updateTime = timestamp + updateSecs #Set the time for the next update to google sheets
-
-	while True:
-		jsonObj = getdata()
+	jsonObj = getdata()
 		
-		if time.time() > updateTime: #if we've reached the update time send data over socket and reset the updateTime
-                        s = socket.socket()         # Create a socket object
-                        host = "13.228.148.72"  # Get remote machine name
-                        port = 12347                # Reserve a port for your service.
-			s.connect((host, port))
-			s.sendall(jsonObj)
-			print s.recv(1024)
-			s.close                     # Close the socket when done
+	s = socket.socket()         # Create a socket object
+	host = "13.228.148.72"  # Get remote machine name
+	port = 12347                # Reserve a port for your service.
+	s.connect((host, port))
+	s.sendall(jsonObj)
+	print s.recv(1024)
+	s.close                     # Close the socket when done
  
-			updateTime = updateTime + updateSecs
 			
 
 
