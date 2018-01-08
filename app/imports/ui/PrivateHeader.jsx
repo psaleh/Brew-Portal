@@ -4,11 +4,14 @@ import { Accounts } from 'meteor/accounts-base';
 
 const PrivateHeader = (props) => {
   return (
-    <div className="header">
-      <div className="header__content">
-        <h1 className="header__title">{props.title}</h1>
-        <button className="button button--link-text" onClick={() => Accounts.logout()}>Logout</button>
+    <div className="row bg-light mb-2">
+      <div className="col-sm-10">
+        <h1 className="display-4">{props.title}</h1>
       </div>
+      <div className="col-sm-2 my-3">
+        <button type="button" className="btn btn-primary" onClick={() => Accounts.logout()}>Logout</button>
+      </div>
+
     </div>
   );
 };

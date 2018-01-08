@@ -41,19 +41,33 @@ export class BrewView extends React.Component {
   render(){
     return (
         <div>
-          <h2>{this.state.title}</h2>
-          <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
-          <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} />
-          <BrewChart 
-            data={this.props.selectedBrewData} 
-            dataKey="gravity" 
-            domain={[1, 'dataMax + 0.005']} 
-            target={this.props.selectedBrew ? this.props.selectedBrew.targetFg : undefined} />
-          <BrewChart 
-            data={this.props.selectedBrewData} 
-            dataKey="temperature" 
-            domain={['dataMin - 2', 'dataMax + 2']} 
-            target={this.props.selectedBrew ? this.props.selectedBrew.targetTemp : undefined} />
+          <div className="row my-4">
+            <h3 className="mx-auto">{this.state.title}</h3>
+          </div>
+          <div className="row">
+            <div className="col-sm text-center">
+              <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
+            </div>
+            <div className="col-sm text-center">
+              <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm">
+              <BrewChart 
+                data={this.props.selectedBrewData} 
+                dataKey="gravity" 
+                domain={[1, 'dataMax + 0.005']} 
+                target={this.props.selectedBrew ? this.props.selectedBrew.targetFg : undefined} />
+            </div>
+            <div className="col-sm">
+              <BrewChart 
+                data={this.props.selectedBrewData} 
+                dataKey="temperature" 
+                domain={['dataMin - 2', 'dataMax + 2']} 
+                target={this.props.selectedBrew ? this.props.selectedBrew.targetTemp : undefined} />
+            </div>    
+          </div>
           
           
         </div>

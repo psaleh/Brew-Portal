@@ -10,11 +10,10 @@ export const BrewListItem = (props) => {
   return (
     <div onClick={() => {
       props.Session.set('selectedBrewId', props.brew._id);
-    }}>
+    }} className={props.brew.selected ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"}>
       <h5>{props.brew.brewName}</h5>
       <p>{props.brew.brewStyle}</p>
       <p>Brewed on: { moment(props.brew.brewDate).format('DD/MM/YYYY') }</p>
-      {props.brew.selected ? <p>selected</p> : undefined} 
     </div>
   );
 };

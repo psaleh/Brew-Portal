@@ -12,11 +12,13 @@ import BrewListItem from './BrewListItem';
 export const BrewList = (props) => {
   return (
     <div>
-      <BrewListHeader/>
-      { props.brews.length === 0 ? <BrewListEmptyItem/> : undefined }
+    <BrewListHeader/>
+    <div className="list-group m-2">
       {props.brews.map((brew) => {
         return <BrewListItem key={brew._id} brew={brew}/>;
       })}
+      { props.brews.length === 0 ? <BrewListEmptyItem/> : undefined }
+    </div>
     </div>
   );
 };
