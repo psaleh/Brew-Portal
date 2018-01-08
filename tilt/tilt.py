@@ -51,7 +51,7 @@ def getdata():
 				tiltSG = float(output[3])/1000
 				tiltTemp = int((tempf - 32) * 5.0/9.0)
 				tiltColour = 'GREEN'
-				tiltBeer = 'TestBrew' #Change to an identifier of a particular brew
+				tiltBeer = 'tdrn3iX9ucmNpbA6n' #Change to an identifier of a particular brew
 
 	#assign values to a dictionary variable for the http POST to google sheet
         data = dict()
