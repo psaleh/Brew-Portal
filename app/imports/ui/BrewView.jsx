@@ -7,6 +7,7 @@ import { Brews } from '../api/brews';
 import { BrewData } from '../api/brewdata';
 import Widget from './Widget';
 import BrewChart from './BrewChart';
+import moment from 'moment';
 
 
 export class BrewView extends React.Component {
@@ -15,7 +16,8 @@ export class BrewView extends React.Component {
     this.state = {
       title: 'Select a Brew or Create a New Brew to Begin',
       gravity: '-.---',
-      temperature: '--.-'
+      temperature: '--.-',
+      lastUpdate: null
     };
   }  
   componentDidUpdate(prevProps, prevState) {
@@ -28,12 +30,14 @@ export class BrewView extends React.Component {
       this.setState({
         title: this.props.selectedBrew.brewName,
         gravity: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].gravity : 'No Data',
-        temperature: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].temperature : 'No Data'
+        temperature: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].temperature : 'No Data',
+        lastUpdate: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].timeStamp : null
       });
     } else if (currentBrewData && currentBrewData !== prevBrewData) {
       this.setState({
         gravity: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].gravity : 'No Data',
-        temperature: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].temperature : 'No Data'
+        temperature: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].temperature : 'No Data',
+        lastUpdate: this.props.selectedBrewData[0] ? this.props.selectedBrewData[0].timeStamp : null
     });
   }
 }
@@ -46,10 +50,13 @@ export class BrewView extends React.Component {
           </div>
           <div className="row">
             <div className="col-sm text-center">
-              <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} />
+              <Widget widgetTitle="Current Gravity" widgetData={this.state.gravity} lastUpdate={moment(this.state.lastUpdate).fromNow()} />
             </div>
             <div className="col-sm text-center">
-              <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} />
+              <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} lastUpdate={moment(this.state.lastUpdate).fromNow()} />
+              {console.log(this.state.lastUpdate)}
+              {console.log(this.state.temperature)}
+              
             </div>
           </div>
           <div className="row">

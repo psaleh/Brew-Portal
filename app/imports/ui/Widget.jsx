@@ -9,6 +9,7 @@ export default class Widget extends React.Component {
         </div>
           <div className="card-body">
             <h2>{this.props.widgetData}</h2>
+            <p>{this.props.lastUpdate}</p>
         </div>
       </div>
     )
