@@ -30,7 +30,6 @@ export default class AddBrew extends React.Component {
     }
     onSubmit(e) {
         const { brewName, brewStyle, targetFg, targetTemp } = this.state;
-        console.log(brewName, brewStyle, targetFg, targetTemp);
 
         e.preventDefault();
 
