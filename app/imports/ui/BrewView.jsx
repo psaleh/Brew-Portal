@@ -54,9 +54,6 @@ export class BrewView extends React.Component {
             </div>
             <div className="col-sm text-center">
               <Widget widgetTitle="Current Temperature" widgetData={this.state.temperature} lastUpdate={moment(this.state.lastUpdate).fromNow()} />
-              {console.log(this.state.lastUpdate)}
-              {console.log(this.state.temperature)}
-              
             </div>
           </div>
           <div className="row">
