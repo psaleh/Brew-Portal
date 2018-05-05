@@ -1,17 +1,19 @@
+version: "3"
 services:
+
    db:
-     image: mongo:latest
+     image: mongo:3.2
      command: mongod --storageEngine=wiredTiger
      volumes:
-       - mongo_data:/data/db
+       - /data/db:/data/db
      restart: always
 
    app:
      environment:
-      - MONGO_URL=mongodb://brewportal_db_1:27017/meteor
-      - ROOT_URL=http://brew.paulsaleh.uk
-      - VIRTUAL_HOST=brew.paulsaleh.uk
-      - VIRTUAL_URL=/
+       - MONGO_URL=mongodb://brew-portal_db_1:27017/meteor
+       - ROOT_URL=http://brew.paulsaleh.uk
+       - VIRTUAL_HOST=brew.paulsaleh.uk
+       - VIRTUAL_URL=/
      depends_on:
        - db
      image: psaleh/brew-portal
@@ -23,12 +25,10 @@ services:
      image: psaleh/brew-portal-logger
      ports:
        - "12347:12347"
+
    proxy:
      image: jwilder/nginx-proxy
      ports:
        - "80:80"
      volumes:
        - /var/run/docker.sock:/tmp/docker.sock:ro
-
-volumes:
-    mongo_data:
